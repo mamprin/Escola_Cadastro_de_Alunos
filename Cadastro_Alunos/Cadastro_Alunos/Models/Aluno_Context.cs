@@ -7,7 +7,7 @@ namespace Cadastro_Alunos.Models
     public class Aluno_Context : DbContext
     {
         public Aluno_Context()
-                     : base("Escola")
+                     : base("Cadastro_Escola")
         { }
         public DbSet<Alunos> alunos { get; set; }
     }
