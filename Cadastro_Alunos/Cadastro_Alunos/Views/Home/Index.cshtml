@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div ng-controller="mvcCRUDController">
+    <p class="h3">
+        <b>
+            <i>Lista de Alunos</i>
+        </b>
+    </p>
+    <div ng-show="divLista">
+        <input type="text" ng-model="procurar" class="form-control input-sm" placeholder="Procurar na Lista" />
+        <div style="overflow-y:auto; height:270px;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Id Aluno
+                        </th>
+                        <th>
+                            Nome do Aluno
+                        </th>
+                        <th>
+                            Nome da Mãe
+                        </th>
+                        <th>
+                            Endereço
+                        </th>
+                        <th>
+                            Série
+                        </th>
+                        <th>
+                            Ação
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="aluno in alunos|filter:procurar" class="table-striped">
+                        <td>{{aluno.ID_ALUNO}}</td>
+                        <td>{{aluno.NOME}}</td>
+                        <td>{{aluno.NOME_MAE}}</td>
+                        <td>{{aluno.ENDERECO}}</td>
+                        <td>{{aluno.SERIE}}</td>
+                        <td>
+                            <span ng-click="editarAluno(aluno)" class="btn-sm btn-primary btn">Alterar</span>
+                            <span ng-click="deletarAluno(aluno)" class="btn-sm btn-danger btn">Excluir</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div ng-show="divVazio">
+        <p class="h5">
+            <b>
+                <i>Não foram encontrados alunos, por favor clique em Adicionar Aluno.</i>
+            </b>
+        </p>
+    </div>
+    <br />
+    <span ng-click="AdicionarAlunoDiv()" class="btn btn-success">
+        Adicionar Aluno
+    </span>
+    <br />
+    <br />
+    <br />
+    <form name="eventForm" ng-show="divAluno">
+        <div>
+            <p class="divHead"></p>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td colspan="6">
+                            <b>
+                                <i>{{Action}} Aluno</i>
+                            </b>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>
+                                ID Aluno
+                            </b>
+                        </td>
+                        <td>
+                            <input type="text" disabled="disabled" class="form-control input-sm" ng-model="ID_ALUNO" />
+                        </td>
+                        <td>
+                            <b>
+                                Nome do Aluno
+                            </b>
+                        </td>
+                        <td>
+                            <input type="text" ng-model="NOME" class="form-control input-sm" ng-required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Nome da Mãe</b>
+                        </td>
+                        <td>
+                            <input type="text" ng-model="NOME_MAE" class="form-control input-sm" ng-required="true" />
+                        </td>
+                        <td>
+                            <b>
+                                End. do Aluno
+                            </b>
+                        </td>
+                        <td>
+                            <input type="text" ng-model="ENDERECO" class="form-control input-sm" ng-required="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>
+                                Série
+                            </b>
+                        </td>
+                        <td>
+                            <input type="text" ng-model="SERIE" class="form-control input-sm" ng-required="true" />
+                        </td>
+                        <td></td>
+                        <td>
+                            <input type="button" class="btn btn-success" value="Salvar" ng-click="AdicionarAtualizarAluno()" ng-disabled="eventForm.$invalid" />
+                            <input type="button" class="btn btn-danger" value="Cancelar" ng-click="Cancel()" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
